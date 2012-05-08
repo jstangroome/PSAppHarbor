@@ -1,30 +1,10 @@
-﻿using System.Management.Automation;
-using System.Security;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace PSAppHarbor.Tests
 {
     [TestClass]
-    public class ConnectAppHarborCmdletTests
+    public class ConnectAppHarborCmdletTests : AppHarborModuleTests
     {
-        public PowerShell PowerShellWithAppHarborModule()
-        {
-            var moduleName = typeof(ConnectAppHarborCmdlet).Assembly.Location;
-            var shell = PowerShell.Create();
-            shell.AddCommand("Import-Module").AddParameter("Name", moduleName);
-            shell.Invoke();
-            return shell;
-        }
-
-        public PSCredential NewCredential(string username, string password)
-        {
-            var securePassword = new SecureString();
-            foreach (var c in password.ToCharArray())
-            {
-                securePassword.AppendChar(c);
-            }
-            return new PSCredential(username, securePassword);
-        }
 
         [TestCategory("Integration")]
         [TestMethod]
@@ -32,9 +12,22 @@ namespace PSAppHarbor.Tests
         {
             using (var shell = PowerShellWithAppHarborModule())
             {
-                shell.AddCommand("Connect-AppHarbor").AddParameter("Credential", NewCredential("notauser", "notthepassword"));
+                shell.AddCommand<ConnectAppHarborCmdlet>().AddParameter("Credential", TestCredentials.Invalid);
                 shell.Invoke();
                 Assert.AreNotEqual(0, shell.Streams.Error.Count);
+            }
+        }
+
+        [TestCategory("Integration")]
+        [TestMethod]
+        public void ConnectAppHarbor_should_return_silently_on_successful_authentication()
+        {
+            using (var shell = PowerShellWithAppHarborModule())
+            {
+                shell.AddCommand<ConnectAppHarborCmdlet>().AddParameter("Credential", TestCredentials.Live);
+                var output = shell.Invoke();
+                Assert.AreEqual(0, output.Count);
+                Assert.AreEqual(0, shell.Streams.Error.Count);
             }
         }
     }

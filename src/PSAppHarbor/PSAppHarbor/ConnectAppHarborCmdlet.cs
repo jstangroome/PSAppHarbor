@@ -29,6 +29,7 @@ namespace PSAppHarbor
                 WriteError(new ErrorRecord(new AuthenticationException(responseValues["error"]), string.Empty, ErrorCategory.SecurityError, null));
             }
             AccessTokenStore.Instance.AccessToken = responseValues["access_token"];
+            WriteVerbose("Authenticated");
         }
     }
 }

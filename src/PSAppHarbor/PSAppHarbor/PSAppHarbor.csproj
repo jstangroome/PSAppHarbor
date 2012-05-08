@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="AccessTokenStore.cs" />
     <Compile Include="ConnectAppHarborCmdlet.cs" />
+    <Compile Include="GetApplicationCmdlet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
