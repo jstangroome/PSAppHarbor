@@ -12,7 +12,7 @@ namespace PSAppHarbor
         [Parameter(Mandatory = true, Position = 0)]
         public PSCredential Credential { get; set; }
 
-        protected override void EndProcessing()
+        protected override void BeginProcessing()
         {
             var networkCredential = Credential.GetNetworkCredential();
             var restClient = new RestClient("https://appharbor-token-client.apphb.com");
