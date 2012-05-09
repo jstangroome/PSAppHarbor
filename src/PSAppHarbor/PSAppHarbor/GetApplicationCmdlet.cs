@@ -25,19 +25,18 @@ namespace PSAppHarbor
         
         protected override void ProcessRecord()
         {
-            foreach (var id in ApplicationID)
-            {
-                WriteObject(_api.GetApplication(id));
-            }
-
-        }
-
-        protected override void EndProcessing()
-        {
             if (ApplicationID == null)
             {
                 WriteObject(_api.GetApplications(), true);
             }
+            else
+            {
+                foreach (var id in ApplicationID)
+                {
+                    WriteObject(_api.GetApplication(id));
+                }
+            }
         }
+
     }
 }
