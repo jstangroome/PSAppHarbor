@@ -10,6 +10,7 @@ namespace PSAppHarbor.Tests
             var shell = PowerShell.Create();
             shell.AddCommand("Import-Module").AddParameter("Name", moduleName);
             shell.Invoke();
+            shell.Commands.Clear();
             return shell;
         }
 
@@ -18,9 +19,9 @@ namespace PSAppHarbor.Tests
             var moduleName = typeof(ConnectAppHarborCmdlet).Assembly.Location;
             var shell = PowerShell.Create();
             shell.AddCommand("Import-Module").AddParameter("Name", moduleName);
-            shell.Invoke();
             shell.AddCommand<ConnectAppHarborCmdlet>().AddParameter("Credential", TestCredentials.Live);
             shell.Invoke();
+            shell.Commands.Clear();
             return shell;
         }
     }
