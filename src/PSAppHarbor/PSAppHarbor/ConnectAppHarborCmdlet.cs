@@ -1,5 +1,6 @@
 ﻿using System.Management.Automation;
 using System.Security.Authentication;
+using AppHarbor;
 using RestSharp;
 using RestSharp.Contrib;
 
@@ -28,8 +29,18 @@ namespace PSAppHarbor
             {
                 WriteError(new ErrorRecord(new AuthenticationException(responseValues["error"]), string.Empty, ErrorCategory.SecurityError, null));
             }
-            AccessTokenStore.Instance.AccessToken = responseValues["access_token"];
-            WriteVerbose("Authenticated");
+            var accessToken = responseValues["access_token"];
+            if (string.IsNullOrEmpty(accessToken))
+            {
+                ApiProvider.Instance.GetApi =
+                    delegate { throw new AuthenticationException("Authenticate with Connect-AppHarbor"); };
+            }
+            else
+            {
+                var authInfo = new AuthInfo { AccessToken = accessToken };
+                ApiProvider.Instance.GetApi = () => new AppHarborApiAdapter(new AppHarborApi(authInfo));
+                WriteVerbose("Authenticated");
+            }
         }
     }
 }

@@ -1,22 +1,13 @@
 ﻿using System.Management.Automation;
-using System.Security.Authentication;
-using AppHarbor;
 
 namespace PSAppHarbor
 {
     [Cmdlet(VerbsCommon.Get, "AHApplication")]
-    public class GetApplicationCmdlet : PSCmdlet
+    public class GetApplicationCmdlet : AppHarborCmdlet
     {
-        private AppHarborApi _api;
-
         protected override void BeginProcessing()
         {
-            if (string.IsNullOrEmpty(AccessTokenStore.Instance.AccessToken))
-            {
-                ThrowTerminatingError(new ErrorRecord(new AuthenticationException("Authenticate with Connect-AppHarbor"), string.Empty, ErrorCategory.SecurityError, null));
-            }
-            var authInfo = new AuthInfo { AccessToken = AccessTokenStore.Instance.AccessToken };
-            _api = new AppHarborApi(authInfo);
+            EnsureAuthenticated();
         }
 
         [Parameter(Position=0, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true)]

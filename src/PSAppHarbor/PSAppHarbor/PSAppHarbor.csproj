@@ -53,8 +53,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccessTokenStore.cs" />
+    <Compile Include="AppHarborApiAdapter.cs" />
+    <Compile Include="AppHarborCmdlet.cs" />
     <Compile Include="ConnectAppHarborCmdlet.cs" />
     <Compile Include="GetApplicationCmdlet.cs" />
+    <Compile Include="IAppHarborApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
