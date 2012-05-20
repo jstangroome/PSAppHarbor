@@ -40,6 +40,9 @@
       <HintPath>..\packages\AppHarbor.NET.1.1.0\lib\net35\AppHarbor.NET.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="NSubstitute">
+      <HintPath>..\packages\NSubstitute.1.4.0.0\lib\NET40\NSubstitute.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -57,7 +60,6 @@
   <ItemGroup>
     <Compile Include="AppHarborModuleTests.cs" />
     <Compile Include="FakeApiScope.cs" />
-    <Compile Include="FakeAppHarborApi.cs" />
     <Compile Include="GetApplicationCmdletTests.cs" />
     <Compile Include="PowerShellExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -70,6 +72,9 @@
       <Project>{324A1B4C-9EE3-41CC-91A7-332FF772439B}</Project>
       <Name>PSAppHarbor</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

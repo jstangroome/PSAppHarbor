@@ -1,19 +1,20 @@
 using System;
+using NSubstitute;
 
 namespace PSAppHarbor.Tests
 {
-    class FakeApiScope : IDisposable
+    class SubstituteApiScope : IDisposable
     {
         private readonly Func<IAppHarborApi> _originalApi;
 
-        public FakeApiScope()
+        public SubstituteApiScope()
         {
             _originalApi = ApiProvider.Instance.GetApi;
-            Api = new FakeAppHarborApi();
+            Api = Substitute.For<IAppHarborApi>();
             ApiProvider.Instance.GetApi = () => Api;
         }
 
-        public FakeAppHarborApi Api { get; set; }
+        public IAppHarborApi Api { get; set; }
 
         public void Dispose()
         {

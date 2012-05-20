@@ -11,7 +11,7 @@ namespace PSAppHarbor
         }
 
         [Parameter(Position=0, ValueFromPipeline = true, ValueFromPipelineByPropertyName = true)]
-        [Alias("ID")]
+        [Alias("ID", "Slug")]
         public string[] ApplicationID { get; set; }
         
         protected override void ProcessRecord()
