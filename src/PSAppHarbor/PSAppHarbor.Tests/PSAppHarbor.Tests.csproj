@@ -59,7 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppHarborModuleTests.cs" />
-    <Compile Include="FakeApiScope.cs" />
+    <Compile Include="SubstituteApiScope.cs" />
     <Compile Include="GetApplicationCmdletTests.cs" />
     <Compile Include="PowerShellExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
