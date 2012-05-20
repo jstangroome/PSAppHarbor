@@ -52,7 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccessTokenStore.cs" />
+    <Compile Include="ApiProvider.cs" />
     <Compile Include="AppHarborApiAdapter.cs" />
     <Compile Include="AppHarborCmdlet.cs" />
     <Compile Include="ConnectAppHarborCmdlet.cs" />
